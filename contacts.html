@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Контакты — НАГН</title>
+<meta name="description" content="Свяжитесь с Национальной академией горных наук или подайте заявку на вступление.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" type="image/png" href="assets/nagn-favicon.png">
+<script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("nagn_theme")||"light"}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Spectral:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/nagn.css?v=1">
+</head>
+<body data-page="contact">
+<script src="js/preloader.js"></script>
+<div id="kn-header"></div>
+
+<main>
+<section class="phero"><div class="wrap phero__in reveal">
+  <h1 data-i18n="p.contacts.t">Контакты</h1>
+  <p class="phero__lead" data-i18n="p.contacts.l"></p>
+</div></section>
+
+<section class="sec"><div class="wrap contact-grid">
+  <form class="form form--2 reveal" id="contactForm" novalidate>
+    <div class="field"><label data-i18n="f.name">Имя</label><input name="name" required></div>
+    <div class="field"><label data-i18n="f.org">Организация</label><input name="org"></div>
+    <div class="field field--full"><label data-i18n="f.email">Email</label><input type="email" name="email" required></div>
+    <div class="field field--full"><label data-i18n="f.msg">Сообщение</label><textarea name="msg" required></textarea></div>
+    <p class="form__note"></p>
+    <button type="submit" class="btn btn--fill form__submit" data-i18n="f.submit">Отправить</button>
+  </form>
+  <div class="cdetails reveal">
+    <div class="row"><span>Адрес</span><span data-contact="address">г. Астана, ул. Сарайшык 32/1</span></div>
+    <div class="row"><span>Email</span><a data-contact="email" href="mailto:nagnkz@mail.ru">nagnkz@mail.ru</a></div>
+    <div class="row"><span>Телефон</span><a data-contact="phone" href="tel:+77172788833">+7 7172 78 88 33</a></div>
+    <div class="row"><span>Часы</span><span>Пн–Пт · 9:00–18:00</span></div>
+  </div>
+</div></section>
+</main>
+
+<div id="kn-footer"></div>
+<script src="js/i18n.js"></script>
+<script src="js/content.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>

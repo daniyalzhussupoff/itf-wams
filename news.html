@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>События и новости — НАГН</title>
+<meta name="description" content="Конференции, заседания Президиума, сотрудничество и научные награды Национальной академии горных наук.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" type="image/png" href="assets/nagn-favicon.png">
+<script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("nagn_theme")||"light"}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Spectral:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/nagn.css?v=1">
+</head>
+<body data-page="news">
+<script src="js/preloader.js"></script>
+<div id="kn-header"></div>
+
+<main>
+<section class="phero"><div class="wrap phero__in reveal">
+  <h1 data-i18n="p.news.t">События и новости</h1>
+  <p class="phero__lead" data-i18n="p.news.l"></p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div id="newsGrid" class="ngrid"></div>
+</div></section>
+</main>
+
+<div class="modal" id="articleModal" role="dialog" aria-modal="true">
+  <div class="am">
+    <button class="am__close" id="amClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <div id="amBody"></div>
+  </div>
+</div>
+
+<div id="kn-footer"></div>
+<script src="js/i18n.js"></script>
+<script src="js/content.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
