@@ -1,49 +1,52 @@
 <!DOCTYPE html>
-<html lang="ru" data-lang="ru">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Контакты — НАГН</title>
-<meta name="description" content="Свяжитесь с Национальной академией горных наук или подайте заявку на вступление.">
-<meta name="theme-color" content="#FFFFFF">
-<link rel="icon" type="image/png" href="assets/nagn-favicon.png">
-<script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("nagn_theme")||"light"}catch(e){}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Spectral:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/nagn.css?v=1">
+<title>Контакты — Всемирная академия горных наук</title>
+<meta name="description" content="Контакты Всемирной академии горных наук: г. Астана, район Есиль, ул. Сарайшық, 32/1, +7 (7172) 78-88-33. Президент Н. Б. Рыспанов, учёный секретарь А. С. Мукушева.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/family.css?v=8">
+<link rel="stylesheet" href="css/wams.css?v=314">
 </head>
-<body data-page="contact">
-<script src="js/preloader.js"></script>
-<div id="kn-header"></div>
-
+<body data-page="contacts">
+<div id="site-header"></div>
 <main>
-<section class="phero"><div class="wrap phero__in reveal">
-  <h1 data-i18n="p.contacts.t">Контакты</h1>
-  <p class="phero__lead" data-i18n="p.contacts.l"></p>
-</div></section>
+  <section class="phead"><div class="wrap">
+    <div class="crumbs"><a href="index.html" data-i18n="nav.home"></a><span>/</span><span data-i18n="con.kick"></span></div>
+    <h1 data-i18n="con.h1"></h1>
+    <p class="phead__lead" data-i18n="con.sub"></p>
+  </div></section>
 
-<section class="sec"><div class="wrap contact-grid">
-  <form class="form form--2 reveal" id="contactForm" novalidate>
-    <div class="field"><label data-i18n="f.name">Имя</label><input name="name" required></div>
-    <div class="field"><label data-i18n="f.org">Организация</label><input name="org"></div>
-    <div class="field field--full"><label data-i18n="f.email">Email</label><input type="email" name="email" required></div>
-    <div class="field field--full"><label data-i18n="f.msg">Сообщение</label><textarea name="msg" required></textarea></div>
-    <p class="form__note"></p>
-    <button type="submit" class="btn btn--fill form__submit" data-i18n="f.submit">Отправить</button>
-  </form>
-  <div class="cdetails reveal">
-    <div class="row"><span>Адрес</span><span data-contact="address">г. Астана, ул. Сарайшык 32/1</span></div>
-    <div class="row"><span>Email</span><a data-contact="email" href="mailto:nagnkz@mail.ru">nagnkz@mail.ru</a></div>
-    <div class="row"><span>Телефон</span><a data-contact="phone" href="tel:+77172788833">+7 7172 78 88 33</a></div>
-    <div class="row"><span>Часы</span><span>Пн–Пт · 9:00–18:00</span></div>
-  </div>
-</div></section>
+  <section class="sheet sheet--white sheet--first sheet--tight"><div class="wrap">
+    <div class="contact">
+      <div class="reveal">
+        <h3 class="kick" data-i18n="con.reach.h"></h3>
+        <div class="info__row"><p class="info__k" data-i18n="con.addr.l"></p><p data-i18n="con.addr.v"></p></div>
+        <div class="info__row"><p class="info__k" data-i18n="con.phone.l"></p><a href="tel:+77172788833">+7 (7172) 78-88-33</a></div>
+        <div class="info__row"><p class="info__k" data-i18n="con.hours.l"></p><p data-i18n="con.hours.v"></p></div>
+
+        <h3 class="kick" style="margin-top:clamp(28px,3.4vw,40px)" data-i18n="con.people.h"></h3>
+        <div class="people">
+          <div class="person"><h3 data-i18n="lead.pres.name"></h3><p class="role" data-i18n="lead.pres.role"></p><a href="mailto:nbr21@mail.ru">nbr21@mail.ru</a><a href="tel:+77017942677">+7 701 794-26-77</a></div>
+          <div class="person"><h3 data-i18n="lead.sec.name"></h3><p class="role" data-i18n="lead.sec.role"></p><a href="mailto:aimsabir54@gmail.com">aimsabir54@gmail.com</a><a href="tel:+77772611773">+7 777 261-17-73</a></div>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:.08s">
+        <h3 class="kick" data-i18n="con.form.h"></h3>
+        <form class="form" id="form" novalidate>
+          <div class="field"><label for="f-world-academy-name" data-i18n="f.name"></label><input id="f-world-academy-name" name="name" type="text" data-i18n-ph="f.name" autocomplete="name"></div>
+          <div class="field"><label for="f-world-academy-email" data-i18n="f.email"></label><input id="f-world-academy-email" name="email" type="email" data-i18n-ph="f.email" autocomplete="email"></div>
+          <div class="field"><label for="f-world-academy-msg" data-i18n="f.msg"></label><textarea id="f-world-academy-msg" name="msg" data-i18n-ph="f.msg"></textarea></div>
+          <div class="form__msg" role="status" aria-live="polite"></div>
+          <button class="btn btn--solid" type="submit" data-i18n="f.send"></button>
+        </form>
+      </div>
+    </div>
+  </div></section>
 </main>
-
-<div id="kn-footer"></div>
-<script src="js/i18n.js"></script>
-<script src="js/content.js"></script>
-<script src="js/site.js"></script>
+<div id="site-footer"></div>
+<script src="js/i18n.js?v=310"></script><script src="js/content.js?v=200"></script><script src="js/wams.js?v=314"></script>
 </body>
 </html>

@@ -1,43 +1,39 @@
 <!DOCTYPE html>
-<html lang="ru" data-lang="ru">
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>События и новости — НАГН</title>
-<meta name="description" content="Конференции, заседания Президиума, сотрудничество и научные награды Национальной академии горных наук.">
-<meta name="theme-color" content="#FFFFFF">
-<link rel="icon" type="image/png" href="assets/nagn-favicon.png">
-<script>document.documentElement.classList.add("js");try{document.documentElement.dataset.theme=localStorage.getItem("nagn_theme")||"light"}catch(e){}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Spectral:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/nagn.css?v=1">
+<title>Новости и события — Всемирная академия горных наук</title>
+<meta name="description" content="Новости и события Всемирной академии горных наук и национальных академий стран-участниц.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/family.css?v=8">
+<link rel="stylesheet" href="css/wams.css?v=314">
 </head>
 <body data-page="news">
-<script src="js/preloader.js"></script>
-<div id="kn-header"></div>
-
+<div id="site-header"></div>
 <main>
-<section class="phero"><div class="wrap phero__in reveal">
-  <h1 data-i18n="p.news.t">События и новости</h1>
-  <p class="phero__lead" data-i18n="p.news.l"></p>
-</div></section>
+  <section class="phead"><div class="wrap">
+    <div class="crumbs"><a href="index.html" data-i18n="nav.home"></a><span>/</span><span data-i18n="newsp.kick"></span></div>
+    <h1 data-i18n="newsp.h1"></h1>
+    <p class="phead__lead" data-i18n="newsp.sub"></p>
+  </div></section>
 
-<section class="sec"><div class="wrap">
-  <div id="newsGrid" class="ngrid"></div>
-</div></section>
+  <section class="sheet sheet--white sheet--first"><div class="wrap">
+    <div class="cards cards--news" id="news"></div>
+  </div></section>
+
+  <section class="sheet sheet--sand sheet--tight"><div class="wrap">
+    <div class="sec__head"><div><span class="kick" data-i18n="gallery.k"></span><h2 data-i18n="gallery.h"></h2></div></div>
+    <div id="gallery"></div>
+
+    <div class="ctab">
+      <h2 data-i18n="cta.h"></h2>
+      <a class="btn btn--solid" href="contacts.html" data-i18n="cta.join"></a>
+    </div>
+  </div></section>
 </main>
-
-<div class="modal" id="articleModal" role="dialog" aria-modal="true">
-  <div class="am">
-    <button class="am__close" id="amClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
-    <div id="amBody"></div>
-  </div>
-</div>
-
-<div id="kn-footer"></div>
-<script src="js/i18n.js"></script>
-<script src="js/content.js"></script>
-<script src="js/site.js"></script>
+<div id="site-footer"></div>
+<script src="js/i18n.js?v=310"></script><script src="js/content.js?v=200"></script><script src="js/wams.js?v=314"></script>
 </body>
 </html>

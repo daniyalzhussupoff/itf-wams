@@ -1,0 +1,404 @@
+/* ============================================================
+   ВАГН — АЙДЕНТИЧНОСТЬ «МЕЖДУНАРОДНАЯ АКАДЕМИЯ»
+
+   Прежний заход («официальный документ»: серое поле, нулевые
+   скругления, бордо) отклонён заказчиком: грубо, едко, дёшево.
+   Здесь другое основание — эмблема ВАГН это не только бордовый
+   венец, но и глобус с зелёной сушей и кремовый диск. От них:
+
+     · тёплая кость вместо серого поля — светлее и дороже;
+     · изумруд суши как основной цвет: в семействе зелёного нет,
+       и он спокойный, а не едкий;
+     · тёплая терракота диска — второй план, экономно;
+     · скругления вернулись, мягкие: 18px карточки, 26px панели;
+     · вместо жёстких рамок — тёплые размытые тени;
+     · фотография ведёт: у академии 58 своих снимков, включая
+       панорамы карьеров и экспедицию на Северный полюс.
+   ============================================================ */
+
+:root{
+  --accent:#2E6A43;        /* изумруд суши с глобуса   5.73:1 */
+  --accent-h:#214F32;      /*                          8.38:1 */
+  --accent-soft:rgba(46,106,67,.09);
+  --clay:#974E2C;          /* тёплая терракота диска   5.43:1 */
+  --clay-soft:rgba(151,78,44,.10);
+
+  --sand:#F6F1E9;          /* тёплая кость — поле страницы */
+  --sand-2:#EDE6DA;
+  --sand-3:#FCFAF7;
+  --ink:#1B1E1C;           /* 14.95:1 */
+  --ink-2:#111312;
+  --muted:#56605A;         /*  5.81:1 */
+  --line:rgba(27,30,28,.11);
+  --line-2:rgba(27,30,28,.20);
+
+  /* мягкая форма вместо документа */
+  --r-card:18px;  --r-btn:10px;  --r-sm:14px;  --r-sheet:26px;
+
+  /* тёплые тени вместо жёстких рамок */
+  --sh-card:0 10px 34px rgba(60,40,20,.10);
+  --sh-card-h:0 18px 48px rgba(60,40,20,.16);
+}
+
+/* ── СЕКЦИИ: мягкие панели на тёплом поле, без наезда и без рамок ── */
+.sheet{
+  margin:clamp(16px,1.8vw,28px) auto 0;
+  max-width:calc(var(--wrap) - 2 * var(--pad));
+  border:0;border-radius:var(--r-sheet);
+  background:var(--white);
+  box-shadow:var(--sh-card);
+  padding:clamp(32px,4vw,60px) clamp(22px,3vw,48px);
+}
+.sheet--white{background:var(--white)}
+.sheet--sand{background:var(--sand-3)}
+.sheet--first{margin-top:clamp(20px,2.4vw,36px)}
+.sheet--tight{margin-bottom:clamp(28px,3.6vw,56px)}
+.sheet>.wrap{max-width:none;padding-inline:0}
+
+/* ── подпись-метка ── */
+.kick{
+  display:block;color:var(--accent);
+  font-size:12px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;margin-bottom:12px;
+}
+
+/* ============================================================
+   ВАГН — Всемирная академия горных наук / World Academy of Mining Sciences
+   Светлая стилистика семейства ITF. Раскладка, типографика, листы секций,
+   кнопки, карточки, реестры, галерея, шапка и подвал живут в css/family.css.
+   Здесь — только акцент (строка выше) и то, чего в слое нет:
+   прогресс чтения, бегущая строка стран, полоса миссии, плоские плитки-цифры,
+   портретные карточки с аватаром, модалка-читалка, лайтбокс, форма контактов.
+   Тёмной темы в файле нет.
+   ============================================================ */
+
+/* шапка и подвал вставляются JS-ом в div-обёртки; display:contents убирает
+   обёртку из потока, иначе sticky-шапка липнет к своему же контейнеру */
+#site-header,#site-footer{display:contents}
+
+/* ─────────────── прогресс чтения ─────────────── */
+.prog{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:120;opacity:.7}
+
+/* фирменный знак в подвале (в слое подвал без логотипа) */
+.foot__logo{width:44px;height:44px;margin-bottom:14px;object-fit:contain}
+
+/* ─────────────── герой главной ───────────────
+   Фотографии производства у академии нет — вся съёмка протокольная,
+   поэтому герой песочный (.thero из слоя). Здесь только ритм CTA. */
+.thero__cta{display:flex;flex-wrap:wrap;gap:12px}
+
+/* ─────────────── бегущая строка стран-участниц ─────────────── */
+.ticker{
+  overflow:hidden;margin-top:clamp(34px,5vw,64px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+}
+.ticker__track{display:flex;align-items:center;gap:14px;width:max-content;white-space:nowrap;animation:tickerMove 48s linear infinite}
+.ticker:hover .ticker__track{animation-play-state:paused}
+.ticker__item{flex:0 0 auto;font-size:var(--fs-sm);color:var(--ink);letter-spacing:.01em}
+.ticker__dot{flex:0 0 auto;color:var(--muted)}
+@keyframes tickerMove{to{transform:translateX(-33.3334%)}}
+@media (prefers-reduced-motion:reduce){ .ticker__track{animation:none} }
+
+/* ─────────────── полоса миссии ─────────────── */
+.mission{background:var(--sand-2);border-radius:var(--r-card);padding:clamp(30px,5vw,72px)}
+.sheet--sand .mission{background:var(--sand-3)}
+.mission p{
+  margin:14px 0 0;max-width:34ch;color:var(--ink);
+  font-size:clamp(22px,2.8vw,38px);font-weight:700;line-height:1.2;letter-spacing:var(--ls-h);
+}
+
+/* ─────────────── плоская плитка-цифра ───────────────
+   Фактурных снимков (порода, бетон, ржавчина) в библиотеке нет,
+   поэтому плитки без фотографии: сплошной акцент, белая цифра (7.84:1). */
+.fig--flat{background:var(--accent)}
+.fig--flat::after{content:none}
+.fig--flat .fig__n{font-size:clamp(30px,3.6vw,50px)}
+
+/* ─────────────── карточка направления (без фото) ─────────────── */
+.card--txt .card__b{padding:clamp(22px,2.4vw,32px);gap:12px}
+/* блоки по два: четыре направления и парные карточки читаются 2×2, а не 3+1 */
+.cards--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card__n{
+  color:var(--accent);font-weight:700;font-size:var(--fs-xs);
+  letter-spacing:.1em;font-variant-numeric:tabular-nums;
+}
+
+/* ─────────────── новости: обложек три на девять записей ───────────────
+   Карточка без снимка остаётся честной текстовой, а не с заглушкой. */
+.card--nophoto .card__b{padding:clamp(22px,2.4vw,34px)}
+.card--lead.card--nophoto .card__b{padding:clamp(26px,3.2vw,44px);justify-content:flex-start}
+.card--lead.card--nophoto .card__t{font-size:clamp(22px,2.2vw,32px)}
+
+/* ─────────────── портретная карточка (академии, вице-президенты) ─────────────── */
+.pcard{cursor:pointer;text-align:left}
+.pcard:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.pcard__top{display:flex;align-items:center;gap:15px;margin-bottom:4px}
+.acad__av{
+  flex:0 0 auto;width:60px;height:60px;border-radius:50%;overflow:hidden;
+  border:1px solid var(--line);background:var(--sand-2);
+}
+.acad__av img{width:100%;height:100%;object-fit:cover;object-position:center 18%}
+.acad__av--none{display:grid;place-items:center}
+.flagbig{font-size:26px;line-height:1}
+
+/* ─────────────── реестр: флаг в первой колонке ─────────────── */
+.lrow .flagbig{width:34px;text-align:center}
+
+/* ─────────────── группа документов ─────────────── */
+.docgroup{margin:0 0 clamp(28px,4vw,46px)}
+.docgroup:last-child{margin-bottom:0}
+.docgroup .kick{margin-bottom:10px}
+
+/* ─────────────── списки учредителей и наблюдателей ─────────────── */
+.flist{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:8px 22px}
+.flist li{position:relative;padding-left:17px;color:var(--ink-2);font-size:var(--fs-sm);line-height:1.5}
+.flist li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+/* ─────────────── подпись группы в галерее ─────────────── */
+.ggroup{margin:0 0 clamp(30px,4.4vw,52px)}
+.ggroup:last-child{margin-bottom:0}
+.ggroup__cap{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  margin-bottom:clamp(14px,1.8vw,20px);padding-bottom:12px;border-bottom:1px solid var(--line);
+}
+.ggroup__cap b{color:var(--ink);font-size:var(--fs-h3);font-weight:700;letter-spacing:-.01em}
+.ggroup__cap p{margin:0;color:var(--muted);font-size:var(--fs-sm)}
+
+/* ─────────────── модалка-читалка (native <dialog>) ─────────────── */
+.rmodal{
+  width:min(760px,94vw);max-height:88vh;padding:0;border:0;
+  border-radius:var(--r-card);background:var(--white);color:var(--ink-2);
+  overflow:hidden;box-shadow:0 40px 100px rgba(60,33,2,.28);
+}
+.rmodal::backdrop{background:rgba(60,33,2,.38);backdrop-filter:blur(4px)}
+.rmodal__in{max-height:88vh;overflow-y:auto;overscroll-behavior:contain}
+.rmodal__x{
+  position:absolute;top:14px;right:14px;z-index:3;width:44px;height:44px;border-radius:50%;
+  display:grid;place-items:center;background:var(--sand);border:1px solid var(--line-2);
+  color:var(--ink);font-size:16px;cursor:pointer;
+  transition:background-color var(--t-col),color var(--t-col);
+}
+.rmodal__x:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.rmodal__cover img{width:100%;max-height:360px;object-fit:cover}
+.rmodal__body{padding:clamp(24px,3.6vw,46px)}
+.rmodal__title{margin:10px 0 20px;color:var(--ink);font-size:var(--fs-h2);font-weight:700;line-height:var(--lh-h);letter-spacing:var(--ls-h)}
+.rmodal__portrait{display:flex;gap:20px;align-items:center;padding:clamp(24px,3.6vw,46px) clamp(24px,3.6vw,46px) 0}
+.rmodal__pph{flex:0 0 auto;width:clamp(84px,14vw,116px);border-radius:50%;overflow:hidden;border:1px solid var(--line)}
+.rmodal__pph img{width:100%;object-fit:cover;aspect-ratio:1/1;object-position:center 18%}
+.rmodal__portrait .rmodal__title{margin:10px 0 0}
+.rmodal__portrait+.rmodal__body{padding-top:20px}
+.rmodal__body p{color:var(--ink-2);max-width:70ch}
+.brmeta{margin:0 0 14px;color:var(--muted);font-size:var(--fs-sm)}
+.brmeta b{color:var(--ink);font-weight:600}
+.rmodal__date{display:block;margin-bottom:6px;color:var(--muted);font-size:var(--fs-xs);font-variant-numeric:tabular-nums}
+.rmodal__link a{color:var(--accent);font-weight:600;font-size:var(--fs-sm);text-decoration:none}
+.rmodal__link a:hover{color:var(--accent-h)}
+.rmodal .ledger{margin-top:clamp(16px,2.4vw,24px)}
+.rmodal[open]{animation:rmIn .34s var(--ease)}
+@keyframes rmIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* лайтбокс галереи: снимок на полный экран поверх затемнённого бэкдропа */
+.rmodal--lb{width:min(1100px,94vw);background:transparent;box-shadow:none;border-radius:0}
+.rmodal--lb .rmodal__in{max-height:92vh;display:flex;align-items:center;justify-content:center}
+.rmodal--lb img{max-width:100%;max-height:92vh;width:auto;height:auto;border-radius:10px;margin:0 auto}
+
+/* ─────────────── контакты ─────────────── */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px)}
+.info__row{padding:15px 0;border-bottom:1px solid var(--line)}
+.info__k{margin:0 0 5px;color:var(--muted);font-size:var(--fs-xs);font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+.info__row a,.info__row p{margin:0;color:var(--ink);font-size:var(--fs-lead);font-weight:600;text-decoration:none}
+.info__row a{display:inline-flex;align-items:center;min-height:44px;transition:color var(--t-col)}
+.info__row a:hover{color:var(--accent)}
+.people{display:flex;flex-direction:column;gap:14px}
+.people-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap)}
+.person{background:var(--sand-3);border:1px solid var(--line);border-radius:var(--r-card);padding:clamp(20px,2.2vw,26px)}
+.sheet--sand .person{background:var(--white)}
+.person h3{margin:0}
+.person .role{margin:6px 0 12px;color:var(--muted);font-size:var(--fs-xs);font-weight:700;text-transform:uppercase;letter-spacing:.09em}
+.person a{display:flex;align-items:center;min-height:42px;color:var(--ink-2);font-size:var(--fs-sm);text-decoration:none;transition:color var(--t-col)}
+.person a:hover{color:var(--accent)}
+
+.form{display:flex;flex-direction:column;gap:15px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{color:var(--muted);font-size:var(--fs-xs);font-weight:700;text-transform:uppercase;letter-spacing:.09em}
+.field input,.field textarea{
+  font:inherit;color:var(--ink);background:var(--white);
+  border:1px solid var(--line-2);border-radius:var(--r-sm);padding:13px 15px;
+  transition:border-color var(--t-col);
+}
+.sheet--white .field input,.sheet--white .field textarea{background:var(--sand-3)}
+.field textarea{min-height:130px;resize:vertical}
+.field input:focus,.field textarea:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}  /* цвет рамки — единственный признак фокуса, добавлено кольцо */
+.form__msg{min-height:1.2em;font-size:var(--fs-sm)}
+.form__msg.ok{color:var(--accent)}
+.form__msg.err{color:var(--danger)}
+.form .btn{align-self:flex-start;margin-top:4px}
+
+/* ─────────────── блок призыва в конце листа ─────────────── */
+.ctab{
+  margin-top:clamp(44px,6vw,84px);padding-top:clamp(34px,4.4vw,60px);
+  border-top:1px solid var(--line);text-align:center;
+}
+.ctab h2{max-width:22ch;margin:0 auto}
+.ctab .btn{margin-top:clamp(20px,2.6vw,32px)}
+
+/* ─────────────── адаптив ─────────────── */
+@media (max-width:900px){
+  .contact{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .cards--2,.people-grid{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .ticker{margin-top:30px}
+}
+
+/* ============================================================
+   РЕЕСТР СТРАН-УЧАСТНИЦ — собственный блок ВАГН
+   Протокольный бланк: графы, номер записи, пометка о свидетельстве.
+   Ни карточек, ни скруглений — таблица официального документа.
+   ============================================================ */
+.reg{border-top:2px solid var(--ink)}
+.reg__head,.reg__row{
+  display:grid;
+  grid-template-columns:44px minmax(150px,1fr) minmax(0,1.5fr) minmax(0,1.3fr) 62px;
+  gap:clamp(10px,1.4vw,22px);align-items:center;
+}
+.reg__head{
+  padding:10px 4px;border-bottom:1px solid var(--line-2);
+  color:var(--muted);font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;
+}
+.reg__head span:last-child,.reg__doc{text-align:center}
+.reg__row{
+  padding:15px 4px;border-bottom:1px solid var(--line);
+  color:inherit;transition:background-color var(--t-col);
+}
+.reg__row:hover{background:var(--accent-soft)}
+.reg__c a{
+  color:inherit;text-decoration:none;
+  text-underline-offset:3px;transition:color var(--t-col);
+}
+.reg__c a:hover{color:var(--accent);text-decoration:underline}
+.reg__n{color:var(--muted);font-size:12px;font-weight:700}
+.reg__c{display:flex;align-items:center;gap:9px;color:var(--ink);font-weight:700;line-height:1.25}
+.reg__fl{font-style:normal;font-size:17px;line-height:1}
+.reg__a{color:var(--ink);line-height:1.3}
+.reg__p{color:var(--muted);font-size:var(--fs-sm);line-height:1.35}
+.reg__doc{
+  justify-self:center;
+  font-size:10.5px;font-weight:700;letter-spacing:.08em;
+  color:var(--accent);border:1px solid var(--accent);
+  padding:5px 8px;text-decoration:none;
+  transition:color var(--t-col),background-color var(--t-col);
+}
+a.reg__doc:hover{background:var(--accent);color:#fff}
+.reg__doc--none{border-color:transparent;color:var(--line-2);cursor:default}
+.reg__note{
+  margin:14px 0 0;color:var(--muted);font-size:12.5px;
+  letter-spacing:.02em;max-width:70ch;
+}
+
+/* на узком экране реестр становится списком записей.
+   Тач-цели: ссылка страны и значок документа добираются до 44px —
+   на десктопе с мышью 20 и 28px хватает, на телефоне нет. */
+@media (max-width:900px){
+  .reg__head{display:none}
+  .reg__c a{display:inline-flex;align-items:center;min-height:44px}
+  .reg__doc{min-height:44px;display:inline-flex;align-items:center;justify-content:center;min-width:48px}
+  .reg__doc--none{min-height:0}
+  .reg__row{
+    grid-template-columns:34px minmax(0,1fr) 56px;
+    grid-template-areas:"n c d" ". a a" ". p p";
+    row-gap:5px;padding:16px 4px;
+  }
+  .reg__n{grid-area:n}
+  .reg__c{grid-area:c}
+  .reg__a{grid-area:a;font-size:var(--fs-sm);color:var(--muted)}
+  .reg__p{grid-area:p;font-size:13px}
+  .reg__doc{grid-area:d}
+}
+
+/* ============================================================
+   ГЕРОЙ ВАГН — ТЕКСТ НА КОСТИ, ПОД НИМ ПАНОРАМА
+   Не баннер с белым текстом поверх затемнения (так у АГМП и ГПСК)
+   и не обложка сборника (так у КАГН). Здесь текст на тёплом поле,
+   а под ним широкая панорама во всю ширину экрана с подписью —
+   собственный снимок академии, а не сток.
+   ============================================================ */
+.whero{padding-top:clamp(30px,4vw,68px);overflow:hidden}
+.whero h1{color:var(--ink);max-width:20ch}
+.whero__sub{
+  color:var(--muted);max-width:58ch;
+  font-size:var(--fs-lead);line-height:var(--lh-lead);
+  margin:clamp(14px,1.8vw,24px) 0 clamp(22px,2.8vw,34px);
+}
+.whero__cta{display:flex;flex-wrap:wrap;gap:12px}
+
+/* числа академии: считаются от данных, поднимаются при появлении */
+.whero__nums{
+  display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,64px);
+  margin-top:clamp(28px,3.6vw,48px);
+  padding-top:clamp(20px,2.4vw,28px);border-top:1px solid var(--line);
+}
+/* Видимо по умолчанию; прячется только пока предок-.reveal не помечен.
+   Если наблюдатель не сработал — числа всё равно на месте. */
+.wnum{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal:not(.in) .wnum{opacity:0;transform:translateY(10px)}
+.wnum__v{
+  display:block;color:var(--accent);
+  font-size:clamp(30px,3.6vw,50px);font-weight:700;line-height:1;letter-spacing:-.03em;
+}
+.wnum__l{
+  display:block;margin-top:8px;color:var(--muted);
+  font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;
+}
+
+/* панорама: во всю ширину экрана, скруглённая, с подписью под кадром */
+.whero__ph{margin:clamp(30px,4vw,62px) 0 0}
+.whero__ph img{
+  width:100%;height:clamp(230px,32vw,430px);object-fit:cover;
+  border-radius:var(--r-sheet);
+  box-shadow:var(--sh-card);
+  transition:transform 1.2s var(--ease);
+}
+.whero__ph:hover img{transform:scale(1.015)}
+.whero__ph figcaption{
+  margin-top:12px;color:var(--muted);font-size:13px;line-height:1.45;max-width:72ch;
+}
+@media (prefers-reduced-motion:reduce){
+  .whero__ph:hover img{transform:none}
+  .reveal:not(.in) .wnum,.reveal:not(.in) .reg__row{opacity:1;transform:none}
+}
+
+/* ── реестр: мягкие строки, портрет президента или флаг ── */
+.reg{border-top:0}
+.reg--rich .reg__head,.reg--rich .reg__row{
+  grid-template-columns:38px 44px minmax(130px,1fr) minmax(0,1.4fr) minmax(0,1.2fr) 60px;
+}
+.reg__head{border-bottom:1px solid var(--line-2)}
+.reg__row{
+  border-bottom:1px solid var(--line);border-radius:var(--r-sm);
+  opacity:1;transform:none;
+  transition:opacity .6s var(--ease),transform .6s var(--ease),background-color var(--t-col);
+}
+.reveal:not(.in) .reg__row{opacity:0;transform:translateY(8px)}
+.reg__av{
+  width:44px;height:44px;border-radius:50%;object-fit:cover;
+  background:var(--sand-2);
+}
+.reg__av--code{
+  display:grid;place-items:center;
+  font-size:12px;font-weight:700;letter-spacing:.06em;
+  color:var(--muted);background:var(--sand-2);
+}
+.reg__doc{border-radius:8px}
+@media (max-width:900px){
+  .reg--rich .reg__row{
+    grid-template-columns:34px 40px minmax(0,1fr) 56px;
+    grid-template-areas:"n av c d" ". . a a" ". . p p";
+  }
+  .reg__av{grid-area:av;width:40px;height:40px}
+}
