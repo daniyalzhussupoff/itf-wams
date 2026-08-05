@@ -17,14 +17,29 @@ var RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /* ---------- data (real content from worldacademyms.com · client proofreads kz/en) ---------- */
 var NAV=[["about","about.html","nav.about"],["academies","academies.html","nav.academies"],
- ["documents","documents.html","nav.docs"],["news","news.html","nav.news"],["contacts","contacts.html","nav.contacts"]];
+ ["documents","documents.html","nav.docs"],["gallery","gallery.html","nav.gallery"],["news","news.html","nav.news"],["contacts","contacts.html","nav.contacts"]];
 var DIRS=["1","2","3","4"];
 var C=window.CONTENT||{};
+/* Portrait supplied for the president of the Kyrgyz Academy of Mining Sciences. */
+if(C.academies){
+  C.academies.forEach(function(a){
+    if(a&&a.president==="Кожогулов Камчибек Чонмурунович"){
+      a.photo="assets/media/2023/01/kozhogulov-kamchibek.jpg";
+    }
+    if(a&&a.president==="П. Очирбат"){
+      a.photo="assets/media/2023/01/ochirbat-p.jpg";
+    }
+  });
+}
 function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
 function LL(o,base){ var en=curLang()==="en"; return (en&&o[base+"_en"])||o[base+"_ru"]||o[base]||""; }
 function paras(arr){ return (arr||[]).map(function(p){ return '<p>'+esc(p)+'</p>'; }).join(""); }
 function flagEmoji(cc){ return (cc||"").toUpperCase().replace(/[A-Z]/g,function(c){ return String.fromCodePoint(127397+c.charCodeAt(0)); }); }
 function more(){ return curLang()==="en"?"Read more →":"Подробнее →"; }
+var ACADEMY_PAGES={KZ:"academy-kazakhstan.html",RU:"academy-russia.html",UA:"academy-ukraine.html",KG:"academy-kyrgyzstan.html",MN:"academy-mongolia.html",GE:"academy-georgia.html",BY:"academy-belarus.html",UZ:"academy-uzbekistan.html"};
+var LEADER_PAGES={"Раимжанов Бахадиржан Раимжанович":"leader-raimzhanov.html","Войтов Игорь Витальевич":"leader-voytov.html"};
+function academyPage(a){ return a&&ACADEMY_PAGES[a.code]||"academies.html"; }
+function leaderPage(v){ return v&&LEADER_PAGES[v.name_ru]||"about.html#leadership"; }
 
 /* ---------- i18n ---------- */
 var LANGS=["ru","en","kz"];
@@ -192,8 +207,8 @@ function openReaderModal(coverUrl,metaLine,title,bodyHtml,opts){
 }
 function wireReaderCards(box,openFn){
   $$("[data-ri]",box).forEach(function(c){
-    c.addEventListener("click",function(){ openFn(+c.dataset.ri); });
-    c.addEventListener("keydown",function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openFn(+c.dataset.ri); } });
+    c.addEventListener("click",function(e){ if(e.target.closest&&e.target.closest("a")) return; openFn(+c.dataset.ri); });
+    c.addEventListener("keydown",function(e){ if(e.target.closest&&e.target.closest("a")) return; if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openFn(+c.dataset.ri); } });
   });
 }
 /* приложенные документы внутри модалки — реестр слоя */
@@ -218,7 +233,7 @@ function renderAcademiesFull(id){
       '<div class="pcard__top">'+av+'<div><span class="tag">'+esc(LL(a,"country"))+'</span>'+
       '<h3 class="card__t" style="margin-top:8px">'+esc(LL(a,"name"))+'</h3></div></div>'+
       (a.president?'<p class="card__p"><b>'+esc(a.president)+'</b></p>':'')+
-      '<span class="card__more">'+more()+'</span></div></article>';
+      '<a class="card__more" href="'+esc(academyPage(a))+'">'+more()+'</a></div></article>';
   }).join("")+'</div>':'';
   var rows=rest.length?'<div class="ledger" style="margin-top:'+(withProfile.length?'clamp(28px,4vw,48px)':'0')+'">'+rest.map(function(a){
     return '<div class="lrow"><span class="flagbig">'+flagEmoji(a.code)+'</span>'+
@@ -237,14 +252,35 @@ function renderAcademiesFull(id){
   });
 }
 
+/* ---------- отдельная страница академии-члена ---------- */
+function renderAcademyProfile(id,code){
+  var box=$(id); if(!box||!C.academies) return;
+  var a=C.academies.filter(function(x){return x.code===code;})[0];
+  if(!a) { box.innerHTML='<p class="empty-state">'+esc(curLang()==="en"?"Academy not found":"Академия не найдена")+'</p>'; return; }
+  var name=LL(a,"name"), country=LL(a,"country"), bio=LL(a,"bio")||[];
+  var portrait=a.photo
+    ? '<div class="profile-card__avatar"><img src="'+esc(a.photo)+'" alt="'+esc(a.president||name)+'"></div>'
+    : '<div class="profile-card__avatar profile-card__avatar--flag"><span>'+flagEmoji(a.code)+'</span></div>';
+  var files=modalFiles(a.files,"u",function(f){ return curLang()==="en"&&f.t_en?f.t_en:f.t; });
+  box.innerHTML='<article class="profile-card reveal">'+
+    '<div class="profile-card__head">'+portrait+'<div><span class="tag">'+esc(country)+'</span><h2>'+esc(name)+'</h2>'+
+    (a.president?'<p class="profile-card__role">'+esc(curLang()==="en"?"President":"Президент")+': '+esc(a.president)+'</p>':'')+'</div></div>'+
+    '<div class="profile-card__body prose">'+paras(bio)+files+'</div>'+
+    '<a class="btn" href="academies.html">'+(curLang()==="en"?"All member academies →":"Все академии-члены →")+'</a>'+
+    '</article>';
+}
+
 /* ---------- leadership (about page): president + secretary + vice presidents ---------- */
 function renderLeadershipFull(id){
   var box=$(id); if(!box||!C.leadership) return;
   var L=C.leadership,out="";
+  function leadPhoto(person){
+    return person&&person.photo?'<div class="person__av"><img src="'+esc(person.photo)+'" alt="'+esc(LL(person,"name"))+'" loading="lazy"></div>':'';
+  }
   out+='<div class="people-grid">'+
-    '<div class="person reveal"><h3>'+esc(LL(L.president,"name"))+'</h3><p class="role">'+esc(LL(L.president,"role"))+'</p>'+
+    '<div class="person person--lead reveal"><div class="person__head">'+leadPhoto(L.president)+'<div><h3>'+esc(LL(L.president,"name"))+'</h3><p class="role">'+esc(LL(L.president,"role"))+'</p></div></div>'+
     '<a href="mailto:nbr21@mail.ru">nbr21@mail.ru</a><a href="tel:+77017942677">+7 701 794-26-77</a></div>'+
-    '<div class="person reveal" style="transition-delay:.06s"><h3>'+esc(LL(L.secretary,"name"))+'</h3><p class="role">'+esc(LL(L.secretary,"role"))+'</p>'+
+    '<div class="person person--lead reveal" style="transition-delay:.06s"><div class="person__head">'+leadPhoto(L.secretary)+'<div><h3>'+esc(LL(L.secretary,"name"))+'</h3><p class="role">'+esc(LL(L.secretary,"role"))+'</p></div></div>'+
     '<a href="mailto:aimsabir54@gmail.com">aimsabir54@gmail.com</a><a href="tel:+77772611773">+7 777 261-17-73</a></div></div>';
   if(L.vicePresidents&&L.vicePresidents.length){
     out+='<div class="cards cards--2" style="margin-top:var(--gap)">'+L.vicePresidents.map(function(vp,i){
@@ -254,7 +290,7 @@ function renderLeadershipFull(id){
         '<div class="pcard__top">'+av+'<div><span class="tag">'+esc(LL(vp,"country"))+'</span>'+
         '<h3 class="card__t" style="margin-top:8px">'+esc(LL(vp,"name"))+'</h3></div></div>'+
         '<p class="card__p"><b>'+esc(LL(vp,"role"))+'</b></p>'+
-        '<span class="card__more">'+more()+'</span></div></article>';
+        '<a class="card__more" href="'+esc(leaderPage(vp))+'">'+more()+'</a></div></article>';
     }).join("")+'</div>';
   }
   box.innerHTML=out;
@@ -263,6 +299,17 @@ function renderLeadershipFull(id){
     openReaderModal(vp.photo,LL(vp,"country"),LL(vp,"name"),
       '<p class="brmeta"><b>'+esc(LL(vp,"role"))+'</b></p>'+paras(LL(vp,"bio")),{portrait:true});
   });
+}
+
+/* ---------- отдельная страница руководителя ---------- */
+function renderLeaderProfile(id,slug){
+  var box=$(id), list=C.leadership&&C.leadership.vicePresidents||[]; if(!box) return;
+  var vp=list.filter(function(v){ return (slug==="raimzhanov"&&v.name_ru.indexOf("Раимжанов")===0)||(slug==="voytov"&&v.name_ru.indexOf("Войтов")===0); })[0];
+  if(!vp){ box.innerHTML='<p class="empty-state">'+esc(curLang()==="en"?"Profile not found":"Профиль не найден")+'</p>'; return; }
+  var portrait=vp.photo?'<div class="profile-card__avatar"><img src="'+esc(vp.photo)+'" alt="'+esc(LL(vp,"name"))+'"></div>':'<div class="profile-card__avatar profile-card__avatar--flag"><span>'+flagEmoji(vp.country_ru)+'</span></div>';
+  box.innerHTML='<article class="profile-card reveal"><div class="profile-card__head">'+portrait+'<div><span class="tag">'+esc(LL(vp,"country"))+'</span><h2>'+esc(LL(vp,"name"))+'</h2><p class="profile-card__role">'+esc(LL(vp,"role"))+'</p></div></div>'+
+    '<div class="profile-card__body prose">'+paras(LL(vp,"bio")||[])+'</div>'+
+    '<a class="btn" href="about.html#leadership">'+(curLang()==="en"?"Back to leadership →":"К руководству →")+'</a></article>';
 }
 
 /* ---------- history article (about page) ---------- */
@@ -278,15 +325,23 @@ function renderFoundersList(fid,oid){
 
 /* ---------- documents (grouped, real hrefs) ---------- */
 function renderDocs(){
-  var box=$("#docs"); if(!box||!C.documents) return;
-  var cats=[]; C.documents.forEach(function(d){ var c=LL(d,"cat"); if(cats.indexOf(c)<0)cats.push(c); });
+  var box=$("#docs");
+  var docs=(C.documents||[]).concat(window.CONTENT_EXTRA_DOCS||[]);
+  if(!box||!docs.length) return;
+  var cats=[]; docs.forEach(function(d){ var c=LL(d,"cat"); if(cats.indexOf(c)<0)cats.push(c); });
   box.innerHTML=cats.map(function(cat){
-    var g=C.documents.filter(function(d){return LL(d,"cat")===cat;});
-    return '<div class="docgroup"><h3 class="kick">'+esc(cat)+'</h3><div class="ledger">'+
+    var g=docs.filter(function(d){return LL(d,"cat")===cat;});
+    var rows='<div class="ledger">'+
       g.map(function(d){
-        return '<a class="lrow reveal" href="'+esc(d.href)+'" target="_blank" rel="noopener"><span class="tag">'+(d.external?"WEB":"PDF")+'</span>'+
+        var ext=(d.href||"").split("?")[0].split(".").pop().toUpperCase();
+        var kind=d.external?"WEB":(ext==="DOC"||ext==="DOCX"?"DOC":ext==="MP4"?"VIDEO":ext==="ZIP"?"ZIP":"PDF");
+        return '<a class="lrow reveal" href="'+esc(d.href)+'" target="_blank" rel="noopener"><span class="tag">'+kind+'</span>'+
           '<b>'+esc(LL(d,"title"))+'</b><span class="meta">'+(d.external?"↗":"↓")+'</span></a>';
-      }).join("")+'</div></div>';
+      }).join("")+"</div>";
+    if(g.some(function(d){return d.archive;})){
+      return '<details class="docgroup docgroup--archive"><summary class="kick">'+esc(cat)+' <span class="doccount">'+g.length+'</span></summary>'+rows+'</details>';
+    }
+    return '<div class="docgroup"><h3 class="kick">'+esc(cat)+'</h3>'+rows+'</div>';
   }).join("");
 }
 
@@ -328,6 +383,23 @@ function renderGallery(id){
       '<div class="gal">'+photosHtml+'</div></div>';
   }).join("");
   wireLightbox(box,flat);
+}
+
+/* ---------- полный архив перенесённых медиафайлов ---------- */
+function renderArchive(id){
+  var box=$(id),files=window.WAMS_ARCHIVE||[]; if(!box||!files.length) return;
+  var groups={};
+  files.forEach(function(file){ var ext=(file.split(".").pop()||"FILE").toUpperCase(); (groups[ext]||(groups[ext]=[])).push(file); });
+  var order=Object.keys(groups).sort(function(a,b){return a.localeCompare(b);});
+  var lang=curLang(), total=files.length;
+  var summary='<div class="archive-toolbar"><span class="kick">'+(lang==="en"?"TRANSFERRED MEDIA ARCHIVE":"ПЕРЕНЕСЁННЫЙ МЕДИААРХИВ")+'</span><b>'+total+' '+(lang==="en"?"files":"файлов")+'</b></div>';
+  box.innerHTML=summary+order.map(function(ext){
+    var rows=groups[ext].map(function(file){
+      var name=file.split("/").pop();
+      return '<a class="lrow reveal" href="'+esc(file)+'" target="_blank" rel="noopener"><span class="tag">'+esc(ext)+'</span><b>'+esc(name)+'</b><span class="meta">↓</span></a>';
+    }).join("");
+    return '<details class="docgroup docgroup--archive" open><summary class="kick">'+esc(ext)+' <span class="doccount">'+groups[ext].length+'</span></summary><div class="ledger">'+rows+'</div></details>';
+  }).join("");
 }
 function wireLightbox(box,flat){
   var dlg=$("#lbmodal");
@@ -418,6 +490,9 @@ function renderContent(){
   renderHistory("#history"); renderFoundersList("#founders","#observers");
   renderLeadershipFull("#leadership"); renderAcademiesFull("#acad-full");
   renderGallery("#gallery");
+  renderArchive("#archive");
+  renderAcademyProfile("#academy-profile",document.body.dataset.academy);
+  renderLeaderProfile("#leader-profile",document.body.dataset.leader);
   renderHeroNums(); renderTicker("#ticker"); renderMission("#mission-p");
 }
 function boot(){
