@@ -42,7 +42,7 @@ window.I18N = {
     "con.kick":"Контакты","con.h1":"Контакты","con.sub":"Секретариат академии и вопросы сотрудничества.","con.reach.h":"Реквизиты",
     "con.addr.l":"Адрес","con.addr.v":"г. Астана, район Есиль, ул. Сарайшық, 32/1","con.phone.l":"Телефон","con.hours.l":"Часы работы","con.hours.v":"Пн–Пт · 9:00–18:00",
     "con.people.h":"Руководство","con.form.h":"Написать нам",
-    "foot.tagline":"Всемирная академия горных наук — международное объединение национальных академий, с 2018 года.","foot.nav":"Разделы","foot.contact":"Контакты","foot.rights":"© 2026 World Academy of Mining Sciences",
+    "foot.tagline":"Всемирная академия горных наук — международное объединение национальных академий, с 2018 года.","foot.nav":"Разделы","foot.contact":"Контакты","foot.rights":"© World Academy of Mining Sciences",
     "f.name":"Имя","f.email":"E-mail","f.msg":"Сообщение","f.send":"Отправить","f.err":"Заполните имя и корректный e-mail.","f.ok":"Спасибо! Мы свяжемся с вами."
   },
   en:{
@@ -87,7 +87,7 @@ window.I18N = {
     "con.kick":"Contacts","con.h1":"Contacts","con.sub":"Academy secretariat and cooperation enquiries.","con.reach.h":"Details",
     "con.addr.l":"Address","con.addr.v":"32/1 Saraishyq St., Yesil district, Astana, Kazakhstan","con.phone.l":"Phone","con.hours.l":"Hours","con.hours.v":"Mon–Fri · 9:00–18:00",
     "con.people.h":"Leadership","con.form.h":"Write to us",
-    "foot.tagline":"World Academy of Mining Sciences — an international union of national academies, since 2018.","foot.nav":"Sections","foot.contact":"Contacts","foot.rights":"© 2026 World Academy of Mining Sciences",
+    "foot.tagline":"World Academy of Mining Sciences — an international union of national academies, since 2018.","foot.nav":"Sections","foot.contact":"Contacts","foot.rights":"© World Academy of Mining Sciences",
     "f.name":"Name","f.email":"E-mail","f.msg":"Message","f.send":"Send","f.err":"Enter your name and a valid e-mail.","f.ok":"Thank you! We'll be in touch."
   },
   kz:{
@@ -132,7 +132,7 @@ window.I18N = {
     "con.kick":"Байланыс","con.h1":"Байланыс","con.sub":"Академия хатшылығы және ынтымақтастық мәселелері.","con.reach.h":"Деректемелер",
     "con.addr.l":"Мекенжай","con.addr.v":"Астана қ., Есіл ауданы, Сарайшық к-сі, 32/1","con.phone.l":"Телефон","con.hours.l":"Жұмыс уақыты","con.hours.v":"Дс–Жм · 9:00–18:00",
     "con.people.h":"Басшылық","con.form.h":"Бізге жазу",
-    "foot.tagline":"Кен ғылымдарының дүниежүзілік академиясы — ұлттық академиялардың халықаралық бірлестігі, 2018 жылдан.","foot.nav":"Бөлімдер","foot.contact":"Байланыс","foot.rights":"© 2026 World Academy of Mining Sciences",
+    "foot.tagline":"Кен ғылымдарының дүниежүзілік академиясы — ұлттық академиялардың халықаралық бірлестігі, 2018 жылдан.","foot.nav":"Бөлімдер","foot.contact":"Байланыс","foot.rights":"© World Academy of Mining Sciences",
     "f.name":"Аты-жөні","f.email":"E-mail","f.msg":"Хабарлама","f.send":"Жіберу","f.err":"Аты-жөні мен дұрыс e-mail енгізіңіз.","f.ok":"Рахмет! Сізбен хабарласамыз."
   }
 };

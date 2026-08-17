@@ -20,8 +20,10 @@ var NAV=[["about","about.html","nav.about"],["academies","academies.html","nav.a
  ["documents","documents.html","nav.docs"],["gallery","gallery.html","nav.gallery"],["news","news.html","nav.news"],["contacts","contacts.html","nav.contacts"]];
 var DIRS=["1","2","3","4"];
 var C=window.CONTENT||{};
-/* Portrait supplied for the president of the Kyrgyz Academy of Mining Sciences. */
-if(C.academies){
+function normalizeContent(){
+  C=window.CONTENT||{};
+  /* Portrait supplied for the president of the Kyrgyz Academy of Mining Sciences. */
+  if(C.academies){
   C.academies.forEach(function(a){
     if(a&&a.president==="Кожогулов Камчибек Чонмурунович"){
       a.photo="assets/media/2023/01/kozhogulov-kamchibek.jpg";
@@ -30,7 +32,18 @@ if(C.academies){
       a.photo="assets/media/2023/01/ochirbat-p.jpg";
     }
   });
+  /* Keep the member-academy registry in alphabetical order by the
+     displayed Russian country name (the site's default language).  The
+     same array feeds the home-page register, the full directory and the
+     country ticker, so every presentation stays in sync. */
+  C.academies.sort(function(a,b){
+    var aa=String(a.country_ru||"").toLocaleUpperCase("ru");
+    var bb=String(b.country_ru||"").toLocaleUpperCase("ru");
+    return aa<bb?-1:(aa>bb?1:0);
+  });
+  }
 }
+normalizeContent();
 function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];}); }
 function LL(o,base){ var en=curLang()==="en"; return (en&&o[base+"_en"])||o[base+"_ru"]||o[base]||""; }
 function paras(arr){ return (arr||[]).map(function(p){ return '<p>'+esc(p)+'</p>'; }).join(""); }
@@ -82,6 +95,8 @@ function renderHeader(){
 }
 function renderFooter(){
   var host=$("#site-footer"); if(!host) return;
+  var contact=(C.settings&&C.settings.contact)||{};
+  var phone=contact.phone||"+7 (7172) 78-88-33",phoneHref=contact.phoneHref||"+77172788833",email=contact.email||"nbr21@mail.ru";
   var nav=NAV.map(function(n){ return '<a href="'+n[1]+'" data-i18n="'+n[2]+'"></a>'; }).join("");
   host.innerHTML=
    '<footer class="foot"><div class="wrap">'+
@@ -90,9 +105,19 @@ function renderFooter(){
        '<b data-i18n="brand.name"></b><p data-i18n="foot.tagline"></p></div>'+
      '<div class="foot__col"><p class="foot__h" data-i18n="foot.nav"></p>'+nav+'</div>'+
      '<div class="foot__col"><p class="foot__h" data-i18n="foot.contact"></p><p data-i18n="con.addr.v"></p>'+
-       '<a href="tel:+77172788833">+7 (7172) 78-88-33</a><a href="mailto:nbr21@mail.ru">nbr21@mail.ru</a></div>'+
+       '<a href="tel:'+esc(phoneHref)+'">'+esc(phone)+'</a><a href="mailto:'+esc(email)+'">'+esc(email)+'</a></div>'+
     '</div><div class="foot__bot"><span data-i18n="foot.rights"></span><span>Astana · KZ</span></div>'+
    '</div></footer>';
+}
+
+function applySettings(){
+  var contact=(C.settings&&C.settings.contact)||{},pres=C.leadership&&C.leadership.president||{},sec=C.leadership&&C.leadership.secretary||{};
+  function link(id,text,href){ var el=$(id); if(!el)return; el.textContent=text||el.textContent; el.href=href||el.href; }
+  link("#contact-phone",contact.phone,"tel:"+(contact.phoneHref||"+77172788833"));
+  link("#president-email",pres.email,"mailto:"+(pres.email||"nbr21@mail.ru"));
+  link("#president-phone",pres.phone,"tel:"+(pres.phoneHref||"+77017942677"));
+  link("#secretary-email",sec.email,"mailto:"+(sec.email||"aimsabir54@gmail.com"));
+  link("#secretary-phone",sec.phone,"tel:"+(sec.phoneHref||"+77772611773"));
 }
 
 /* ---------- направления деятельности ---------- */
@@ -326,7 +351,7 @@ function renderFoundersList(fid,oid){
 /* ---------- documents (grouped, real hrefs) ---------- */
 function renderDocs(){
   var box=$("#docs");
-  var docs=(C.documents||[]).concat(window.CONTENT_EXTRA_DOCS||[]);
+  var docs=(C.documents||[]).concat(C.extraDocuments||window.CONTENT_EXTRA_DOCS||[]);
   if(!box||!docs.length) return;
   var cats=[]; docs.forEach(function(d){ var c=LL(d,"cat"); if(cats.indexOf(c)<0)cats.push(c); });
   box.innerHTML=cats.map(function(cat){
@@ -496,10 +521,12 @@ function renderContent(){
   renderHeroNums(); renderTicker("#ticker"); renderMission("#mission-p");
 }
 function boot(){
-  renderHeader(); renderFooter(); renderDirs(); renderContent();
+  normalizeContent();
+  renderHeader(); renderFooter(); renderDirs(); renderContent(); applySettings();
   setLang(curLang()); wireLang();
   wireChrome(); wireReveal(); wireCounters(); wireForm();
   _booted=true;
 }
-if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot); else boot();
+function launch(){ if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot,{once:true}); else boot(); }
+if(window.CMS_READY&&typeof window.CMS_READY.then==="function") window.CMS_READY.then(launch,launch); else launch();
 })();
