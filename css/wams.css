@@ -405,20 +405,60 @@ a.reg__doc:hover{background:var(--accent);color:#fff}
   font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;
 }
 
-/* панорама: во всю ширину экрана, скруглённая, с подписью под кадром */
-.whero__ph{margin:clamp(30px,4vw,62px) 0 0}
-.whero__ph img{
-  width:100%;height:clamp(230px,32vw,430px);object-fit:cover;
-  border-radius:var(--r-sheet);
-  box-shadow:var(--sh-card);
-  transition:transform 1.2s var(--ease);
+/* Stock-photo bento: fieldwork, laboratory science, mineral samples, and people. */
+.whero__ph{
+  width:calc(var(--wrap) - 2 * var(--pad));max-width:100%;
+  margin:clamp(30px,4vw,62px) auto 0;
 }
-.whero__ph:hover img{transform:scale(1.015)}
-.whero__ph figcaption{
+.whero__ph>.wrap{max-width:none;padding-inline:0}
+.whero__collage{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-rows:repeat(2,clamp(190px,16vw,250px));gap:4px;
+}
+.whero__collage.reveal .whero__tile{
+  opacity:0;transform:translateY(16px) scale(.985);
+  transition:opacity .7s var(--ease),transform .7s var(--ease),box-shadow .7s var(--ease);
+}
+.whero__collage.reveal.in .whero__tile{opacity:1;transform:translateY(0) scale(1)}
+.whero__collage.reveal.in .whero__tile:nth-child(2){transition-delay:80ms}
+.whero__collage.reveal.in .whero__tile:nth-child(3){transition-delay:150ms}
+.whero__collage.reveal.in .whero__tile:nth-child(4){transition-delay:220ms}
+.whero__tile{
+  position:relative;min-height:0;overflow:hidden;
+  border-radius:var(--r-sheet);background:var(--ink);box-shadow:var(--sh-card);
+}
+.whero__tile::after{
+  position:absolute;inset:0;content:"";
+  background:linear-gradient(180deg,rgba(0,0,0,0) 46%,rgba(0,0,0,.68) 100%);
+  pointer-events:none;
+}
+.whero__tile img{
+  display:block;width:100%;height:100%;object-fit:cover;
+  transform:translate3d(0,var(--hero-shift,0),0) scale(1.02);
+  transition:transform 900ms var(--ease),filter 900ms var(--ease);
+}
+.whero__tile--main{grid-row:1 / 3}
+.whero__tile--detail{grid-column:2 / 4}
+.whero__tile--main img{object-position:center 54%}
+.whero__tile--lab img{object-position:center 50%}
+.whero__tile--field img{object-position:center 50%}
+.whero__tile--detail img{object-position:center 44%}
+.whero__tile figcaption{
+  position:absolute;right:14px;bottom:12px;left:14px;z-index:1;
+  color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;text-shadow:0 1px 14px rgba(0,0,0,.45);
+}
+.whero__ph>div>figcaption{
   margin-top:12px;color:var(--muted);font-size:13px;line-height:1.45;max-width:72ch;
 }
+.whero__tile:hover img{filter:saturate(1.08);transform:translate3d(0,var(--hero-shift,0),0) scale(1.035)}
+@media (max-width:700px){
+  .whero__collage{grid-template-columns:1fr 1fr;grid-template-rows:230px 160px 160px;gap:4px}
+  .whero__tile--main{grid-column:1 / 3;grid-row:auto}
+  .whero__tile--detail{grid-column:1 / 3}
+}
 @media (prefers-reduced-motion:reduce){
-  .whero__ph:hover img{transform:none}
+  .whero__tile img{transform:none}
   .reveal:not(.in) .wnum,.reveal:not(.in) .reg__row{opacity:1;transform:none}
 }
 

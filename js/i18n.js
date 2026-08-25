@@ -1,7 +1,7 @@
 /* ВАГН / WAMS — i18n dictionary (RU source from worldacademyms.com · EN natural · KZ best-effort, client proofreads). Default ru. */
 window.I18N = {
   ru:{
-    "home.heroCap":"Улан-Батор, сентябрь 2022 — визит делегации ВАГН на горнодобывающие предприятия Монголии","hero.n1":"страны-участницы","hero.n2":"год основания","hero.n3":"снимков в архиве","reg.country":"Страна","reg.academy":"Академия горных наук","reg.head":"Президент","reg.doc":"Документ","reg.note":"Всего %d стран-участниц. Свидетельства о регистрации открываются в новом окне.","brand.name":"ВАГН","brand.tag":"Всемирная академия горных наук",
+    "home.heroCap":"Горные исследования — поле, лаборатория, образцы и технологии","hero.n1":"страны-участницы","hero.n2":"год основания","hero.n3":"снимков в архиве","reg.country":"Страна","reg.academy":"Академия горных наук","reg.head":"Президент","reg.doc":"Документ","reg.note":"Всего %d стран-участниц. Свидетельства о регистрации открываются в новом окне.","brand.name":"ВАГН","brand.tag":"Всемирная академия горных наук",
     "nav.home":"Главная","nav.about":"Об академии","nav.academies":"Академии-члены","nav.docs":"Документы","nav.gallery":"Фотогалерея","nav.news":"Новости","nav.contacts":"Контакты",
     "cta.join":"Связаться","cta.academies":"Академии-члены","cta.about":"Об академии",
     "home.kick":"Международная научная организация · с 2018",
@@ -10,11 +10,11 @@ window.I18N = {
     "stat.year.l":"Год основания","stat.countries.l":"Стран-участниц","stat.acad.l":"Национальных академий","stat.hq.v":"Астана","stat.hq.l":"Штаб-квартира",
     "sec.dirs.k":"Направления","sec.dirs.h":"Основные направления деятельности","sec.dirs.note":"Академия работает по четырём ключевым направлениям на пространстве стран-участниц.",
     "dir.1":"Развитие горнопромышленного комплекса","dir.1d":"Содействие развитию и совершенствованию горнодобывающих комплексов стран-участниц.",
-    "dir.2":"Регулирование отрасли","dir.2d":"Формирование эффективной системы регулирования горнопромышленной отрасли.",
+    "dir.2":"Законодательные инициативы","dir.2d":"Формирование эффективной системы регулирования горнопромышленной отрасли.",
     "dir.3":"Научно-инновационный потенциал","dir.3d":"Развитие научного и инновационного потенциала горного дела и смежных наук.",
     "dir.4":"Научные кадры","dir.4d":"Подготовка и переподготовка высших научных кадров для отрасли.",
     "mission.k":"Миссия","mission.p":"Одна из важных целей — содействие совершенствованию и развитию горнодобывающих комплексов стран-участниц академии.",
-    "sec.acad.k":"Академии-члены","sec.acad.h":"Национальные академии горных наук","sec.acad.note":"Академию образуют национальные академии и научные организации стран-участниц.",
+    "sec.acad.k":"Академии-члены","sec.acad.h":"Научные организации стран-участниц","sec.acad.note":"Академию образуют национальные академии и научные организации стран-участниц.",
     "acad.ru.c":"Россия","acad.ru.a":"Академия горных наук России",
     "acad.kz.c":"Казахстан","acad.kz.a":"Национальная академия горных наук Казахстана",
     "acad.kg.c":"Кыргызстан","acad.kg.a":"Академия горных наук Кыргызстана",
@@ -46,7 +46,7 @@ window.I18N = {
     "f.name":"Имя","f.email":"E-mail","f.msg":"Сообщение","f.send":"Отправить","f.err":"Заполните имя и корректный e-mail.","f.ok":"Спасибо! Мы свяжемся с вами."
   },
   en:{
-    "home.heroCap":"Ulaanbaatar, September 2022 — WAMS delegation visiting mining operations in Mongolia","hero.n1":"member countries","hero.n2":"founded","hero.n3":"photographs on file","reg.country":"Country","reg.academy":"Academy of Mining Sciences","reg.head":"President","reg.doc":"Document","reg.note":"%d member countries in total. Registration certificates open in a new tab.","brand.name":"WAMS","brand.tag":"World Academy of Mining Sciences",
+    "home.heroCap":"Mining research — fieldwork, laboratory science, samples, and technology","hero.n1":"member countries","hero.n2":"founded","hero.n3":"photographs on file","reg.country":"Country","reg.academy":"Academy of Mining Sciences","reg.head":"President","reg.doc":"Document","reg.note":"%d member countries in total. Registration certificates open in a new tab.","brand.name":"WAMS","brand.tag":"World Academy of Mining Sciences",
     "nav.home":"Home","nav.about":"About","nav.academies":"Member academies","nav.docs":"Documents","nav.gallery":"Photo gallery","nav.news":"News","nav.contacts":"Contacts",
     "cta.join":"Contact us","cta.academies":"Member academies","cta.about":"About",
     "home.kick":"International scientific organisation · since 2018",
@@ -91,7 +91,7 @@ window.I18N = {
     "f.name":"Name","f.email":"E-mail","f.msg":"Message","f.send":"Send","f.err":"Enter your name and a valid e-mail.","f.ok":"Thank you! We'll be in touch."
   },
   kz:{
-    "home.heroCap":"Ұлан-Батор, 2022 жылғы қыркүйек — ВАГН делегациясының Моңғолиядағы тау-кен кәсіпорындарына сапары","hero.n1":"қатысушы ел","hero.n2":"құрылған жыл","hero.n3":"мұрағаттағы сурет","reg.country":"Ел","reg.academy":"Тау-кен ғылымдары академиясы","reg.head":"Президент","reg.doc":"Құжат","reg.note":"Барлығы %d қатысушы ел. Тіркеу туралы куәліктер жаңа терезеде ашылады.","brand.name":"ВАГН","brand.tag":"Кен ғылымдарының дүниежүзілік академиясы",
+    "home.heroCap":"Тау-кен зерттеулері — дала, зертхана, үлгілер және технология","hero.n1":"қатысушы ел","hero.n2":"құрылған жыл","hero.n3":"мұрағаттағы сурет","reg.country":"Ел","reg.academy":"Тау-кен ғылымдары академиясы","reg.head":"Президент","reg.doc":"Құжат","reg.note":"Барлығы %d қатысушы ел. Тіркеу туралы куәліктер жаңа терезеде ашылады.","brand.name":"ВАГН","brand.tag":"Кен ғылымдарының дүниежүзілік академиясы",
     "nav.home":"Басты бет","nav.about":"Академия туралы","nav.academies":"Мүше академиялар","nav.docs":"Құжаттар","nav.gallery":"Фотогалерея","nav.news":"Жаңалықтар","nav.contacts":"Байланыс",
     "cta.join":"Байланысу","cta.academies":"Мүше академиялар","cta.about":"Академия туралы",
     "home.kick":"Халықаралық ғылыми ұйым · 2018 жылдан",

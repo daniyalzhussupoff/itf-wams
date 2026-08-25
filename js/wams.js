@@ -467,6 +467,20 @@ function wireChrome(){
     }); });
   }
 }
+/* ---------- hero motion (subtle scroll morph, 21st.dev-inspired) ---------- */
+function wireHeroMotion(){
+  var hero=$(".whero__collage"); if(!hero||RM) return;
+  var tiles=$$(".whero__tile",hero),ticking=false,depth=[-16,8,-6,12];
+  function update(){
+    var r=hero.getBoundingClientRect(),p=((window.innerHeight-r.top)/(window.innerHeight+r.height))-.5;
+    tiles.forEach(function(tile,i){ tile.style.setProperty("--hero-shift",(p*depth[i]).toFixed(2)+"px"); });
+    ticking=false;
+  }
+  function onScroll(){ if(ticking)return; ticking=true; requestAnimationFrame(update); }
+  window.addEventListener("scroll",onScroll,{passive:true});
+  window.addEventListener("resize",onScroll,{passive:true});
+  update();
+}
 
 /* ---------- reveal (IO + FAIL-SAFE) ---------- */
 function wireReveal(){
@@ -524,7 +538,7 @@ function boot(){
   normalizeContent();
   renderHeader(); renderFooter(); renderDirs(); renderContent(); applySettings();
   setLang(curLang()); wireLang();
-  wireChrome(); wireReveal(); wireCounters(); wireForm();
+  wireChrome(); wireHeroMotion(); wireReveal(); wireCounters(); wireForm();
   _booted=true;
 }
 function launch(){ if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot,{once:true}); else boot(); }
