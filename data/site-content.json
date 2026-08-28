@@ -262,13 +262,29 @@
         "Governing body — the Presidium: Levan Japaridze, Tamaz Akhvlediani, Akaki Gurjidze, Nikoloz Chikhradze.",
         "Contacts: chikhradze@mining.org.ge, tel. +995 577 392 550."
       ],
-      "photo": "",
+      "photo": "https://raw.githubusercontent.com/daniyalzhussupoff/itf-wams/main/assets/media/uploads/1787918644946-nikoloz-chikhradze.jpg",
       "files": [
         {
           "t": "Выписка из реестра юридических лиц Грузии",
           "t_en": "Extract from the Registry of Legal Entities",
           "u": "assets/docs/georgia-amn.pdf"
         }
+      ],
+      "presidentBio_ru": [
+        "Николоз Чихрадзе — директор Горного института Грузии (LEPL G. Tsulukidze Mining Institute) с 2007 года и профессор Грузинского технического университета с 2013 года.",
+        "В 1975–1980 годах окончил факультет инженерной физики Грузинского технического университета. В 1994 году получил степень кандидата технических наук (PhD) в Институте металлургии и материаловедения имени Ф. Тавадзе.",
+        "С 1980 года работал в Горном институте Грузии, пройдя путь от инженера и научного сотрудника до ведущего и главного научного сотрудника. В 2003–2006 годах был заместителем директора, в 2006–2007 годах — исполняющим обязанности директора.",
+        "Участвовал в 37 международных и 16 локальных научно-исследовательских проектах, включая программы NATO Science for Peace and Security, ISTC и STCU/DOE. Основные направления — защита подземных сооружений от взрывов, теория детонации, ударно-волновая физика и получение наноструктурированных материалов.",
+        "Автор 2 монографий, 127 научных статей, более 120 материалов конференций и 7 патентов; в резюме также указаны 3 научных открытия.",
+        "Преподаёт взрывную физику, экспертизу взрывов, теорию детонации, физику ударных волн и газовую динамику. С 2019 года — академик Грузинской инженерной академии; входит в редакционные коллегии 6 международных научных журналов и международные программные комитеты профильных конференций."
+      ],
+      "presidentBio_en": [
+        "Nikoloz Chikhradze has been Director of the Mining Institute of Georgia (LEPL G. Tsulukidze Mining Institute) since 2007 and Professor at Georgian Technical University since 2013.",
+        "He graduated from the Faculty of Engineering Physics of Georgian Technical University in 1975–1980. In 1994 he received a PhD in Technical Sciences from the F. Tavadze Institute of Metallurgy and Materials Science.",
+        "Since 1980 he has worked at the Mining Institute of Georgia, progressing from engineer and junior scientist to leading and principal scientist. He served as Deputy Director from 2003 to 2006 and Acting Director from 2006 to 2007.",
+        "He has taken part in 37 international and 16 local research projects, including NATO Science for Peace and Security, ISTC and STCU/DOE programmes. His fields include protection of underground structures from explosions, detonation theory, shock-wave physics and nanostructured materials.",
+        "His record includes 2 monographs, 127 scientific articles, more than 120 conference papers and 7 patents; the CV also records 3 scientific discoveries.",
+        "He teaches explosive physics, explosion expertise, detonation theory, shock-wave physics and gas dynamics. Since 2019 he has been an Academician of the Georgian Engineering Academy; he serves on the editorial boards of 6 international scientific journals and on international programme committees in geology, mining and industrial processing."
       ]
     },
     {
